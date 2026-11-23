@@ -19,7 +19,7 @@ export const MISSIONS = [
     ],
     objectives: [
       { type: 'enterCar', text: 'Steal a car (walk up to one, press E)' },
-      { type: 'goto', x: 420, y: 1080, radius: 70, text: 'Drive to the Marina meet' },
+      { type: 'goto', x: 440, y: 1160, radius: 70, text: 'Drive to the Marina meet' },
     ],
   },
   {
@@ -32,9 +32,9 @@ export const MISSIONS = [
       'Lena: Then bring it to Rico’s Garage in the Industrial district. Quietly.',
     ],
     objectives: [
-      { type: 'goto', x: 2500, y: 480, radius: 60, text: 'Drive to Old Town' },
-      { type: 'pickup', x: 2500, y: 480, radius: 40, text: 'Pick up the package (walk into the marker)' },
-      { type: 'goto', x: 2480, y: 1820, radius: 70, text: 'Deliver the package to Rico’s Garage' },
+      { type: 'goto', x: 2600, y: 560, radius: 60, text: 'Drive to Old Town' },
+      { type: 'pickup', x: 2600, y: 560, radius: 40, text: 'Pick up the package (walk into the marker)' },
+      { type: 'goto', x: 2600, y: 1760, radius: 70, text: 'Deliver the package to Rico’s Garage' },
     ],
   },
   {
@@ -47,7 +47,7 @@ export const MISSIONS = [
       'Lena: Get to the safehouse in the Suburbs. Do not get caught.',
     ],
     objectives: [
-      { type: 'escape', x: 560, y: 2080, radius: 70, text: 'Reach the safehouse — lose the police or outrun them' },
+      { type: 'escape', x: 680, y: 2160, radius: 70, text: 'Reach the safehouse — lose the police or outrun them' },
     ],
   },
   {
@@ -60,8 +60,8 @@ export const MISSIONS = [
       'Lena: Grab the loot, then run for the boat at the Marina. This is the one, Jace.',
     ],
     objectives: [
-      { type: 'goto', x: 1520, y: 880, radius: 70, text: 'Reach the Solara Grand Casino' },
-      { type: 'grab', x: 1520, y: 880, radius: 46, text: 'Take the loot from the vault (walk in)' },
+      { type: 'goto', x: 1640, y: 960, radius: 70, text: 'Reach the Solara Grand Casino' },
+      { type: 'grab', x: 1640, y: 960, radius: 46, text: 'Take the loot from the vault (walk in)' },
       { type: 'escape', x: 150, y: 700, radius: 70, text: 'Escape to the getaway boat at the Marina' },
     ],
   },
@@ -101,9 +101,9 @@ export function startMission(world) {
   if (mission.id === 'heat') addWanted(world, 3, 'the Vultures tipped off the police');
   if (mission.id === 'score') {
     // Vulture gunmen guard the casino vault.
-    world.enemies.push(createEnemy(1460, 820, 70));
-    world.enemies.push(createEnemy(1580, 940, 70));
-    world.enemies.push(createEnemy(1520, 760, 90));
+    world.enemies.push(createEnemy(1640, 880, 70));
+    world.enemies.push(createEnemy(1560, 960, 70));
+    world.enemies.push(createEnemy(1720, 960, 90));
   }
 }
 

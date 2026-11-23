@@ -121,12 +121,12 @@ export function generateCity(random) {
 
   const places = {
     playerStart: { x: 320, y: 1180, label: 'Marina' },
-    safehouse: { x: 560, y: 2080, label: 'Safehouse' },
-    garage: { x: 2480, y: 1820, label: 'Rico’s Garage' },
-    casino: { x: 1520, y: 880, label: 'Solara Grand Casino' },
-    packageSpot: { x: 2500, y: 480, label: 'Old Town drop' },
+    safehouse: { x: 680, y: 2160, label: 'Safehouse' },
+    garage: { x: 2600, y: 1760, label: 'Rico’s Garage' },
+    casino: { x: 1640, y: 960, label: 'Solara Grand Casino' },
+    packageSpot: { x: 2600, y: 560, label: 'Old Town drop' },
     boat: { x: 150, y: 700, label: 'The Getaway Boat' },
-    hospital: { x: 1000, y: 680, label: 'St. Anselm Hospital' },
+    hospital: { x: 920, y: 760, label: 'St. Anselm Hospital' },
   };
 
   return { buildings, trees, blocks, places };

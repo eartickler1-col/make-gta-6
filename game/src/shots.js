@@ -89,11 +89,11 @@ export function stageShot(name, world) {
     // gunman watching the drop.
     world.missions.index = 1;
     startMission(world);
-    player.x = 2420;
-    player.y = 480;
+    player.x = 2520;
+    player.y = 560;
     player.angle = 0;
-    world.enemies.push(createEnemy(2560, 420, 70));
-    world.enemies.push(createEnemy(2430, 560, 70));
+    world.enemies.push(createEnemy(2600, 480, 70));
+    world.enemies.push(createEnemy(2680, 560, 70));
     for (let i = 0; i < 30; i += 1) {
       stepWorld(world, scriptedInput({ x: 0, y: 0 }), STEP);
     }

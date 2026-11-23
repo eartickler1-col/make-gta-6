@@ -169,7 +169,10 @@ export function drivePlayerCar(world, car, axes, dt, handbrake) {
     world.shake(0.25);
     world.sound.crash();
   }
-  // Bumping traffic cars slows both down.
+  // Bumping traffic cars: always separate the bodies, but only take speed
+  // off on a fresh impact (bumpCooldown), so pushing a slower car does not
+  // glue both cars to a stop frame after frame.
+  car.bumpCooldown = Math.max(0, (car.bumpCooldown || 0) - dt);
   for (const other of world.cars) {
     if (other === car || other.wrecked) continue;
     const dx = other.x - car.x;
@@ -183,8 +186,15 @@ export function drivePlayerCar(world, car, axes, dt, handbrake) {
       other.y += uy * push;
       car.x -= ux * push;
       car.y -= uy * push;
-      car.speed *= 0.7;
-      other.speed *= 0.5;
+      if (car.bumpCooldown <= 0) {
+        car.speed *= 0.7;
+        other.speed *= 0.5;
+        car.bumpCooldown = 0.3;
+        if (Math.abs(car.speed) > 120) {
+          world.spark(car.x + ux * 20, car.y + uy * 20);
+          world.sound.crash();
+        }
+      }
     }
   }
 }

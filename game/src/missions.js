@@ -95,6 +95,7 @@ export function startMission(world) {
   world.missions.active = true;
   world.missions.started = true;
   world.missions.objectiveIndex = 0;
+  world.saveRequested = true;
   for (const line of mission.briefing) world.say(line);
   world.say(`${mission.title} — ${mission.objectives[0].text}`);
   if (mission.id === 'heat') addWanted(world, 3, 'the Vultures tipped off the police');
@@ -135,6 +136,7 @@ function completeMission(world) {
   state.done.push(mission.id);
   state.active = false;
   state.index += 1;
+  world.saveRequested = true;
   world.sound.missionDone();
   world.say(`Mission complete: ${mission.title} — $${mission.reward} earned.`);
   if (state.index >= MISSIONS.length) {
@@ -156,9 +158,9 @@ export function missionMarker(world) {
   }
   const mission = currentMission(state);
   if (!mission) return null;
-  // Start markers: the first objective's spot, or the Marina meet for job one.
+  // Start markers: the first objective's spot, or the beach car for job one.
   const first = mission.objectives[0];
-  if (first.type === 'enterCar') return { x: 420, y: 1080, label: `${mission.title} — start here` };
+  if (first.type === 'enterCar') return { x: 160, y: 1180, label: `${mission.title} — start here` };
   return { x: first.x, y: first.y, label: `${mission.title} — start here` };
 }
 

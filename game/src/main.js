@@ -10,6 +10,7 @@
 
 import { VIEW_H, VIEW_W } from './config.js';
 import { createWorld, stepWorld } from './game.js';
+import { currentObjective } from './missions.js';
 import { createInput, ACTION_CONFIRM, ACTION_PAUSE } from './input.js';
 import { drawWorld } from './render.js';
 import { drawBusted, drawHud, drawMissionComplete, drawPaused, drawStoryComplete, drawTitle } from './hud.js';
@@ -80,8 +81,27 @@ function runGame() {
   let last = performance.now();
   let titlePan = 0;
 
+  // Read-only handle for automated tests (and curious players): the live
+  // world and a one-line summary of the current state.
+  window.__world = world;
+  window.__debug = () => ({
+    screen,
+    x: Math.round(world.player.x),
+    y: Math.round(world.player.y),
+    inCar: !!world.player.inCar,
+    health: Math.round(world.player.health),
+    money: world.player.money,
+    wanted: world.wanted,
+    cops: world.cops.length,
+    missionIndex: world.missions.index,
+    missionActive: !!world.missions.active,
+    missionObjective: world.missions.active ? currentObjective(world.missions)?.id ?? null : null,
+    storyDone: world.storyDone,
+  });
+
   function startGame(continueSave) {
     world = createWorld(seed, continueSave ? loadGame() : null);
+    window.__world = world;
     if (!continueSave) clearSave();
     world.sound.unlock();
     accumulator = 0;

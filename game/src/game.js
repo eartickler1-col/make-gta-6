@@ -109,14 +109,16 @@ export function createWorld(seed, saveData = null) {
   };
 
   // Populate the city: traffic, pedestrians, a few parked cars to steal,
-  // and cash pickups to find.
+  // and cash pickups to find. Parked cars sit on the beach strip (west of
+  // the Marina road), clear of traffic lanes, so stealing one is always a
+  // parked car — never a passing traffic car.
   spawnTraffic(world, 14);
   spawnPeds(world, 24);
-  spawnParkedCar(world, 420, 1060, 0);
-  spawnParkedCar(world, 900, 1160, Math.PI / 2);
-  spawnParkedCar(world, 1520, 1160, 0);
-  spawnParkedCar(world, 2360, 760, Math.PI);
-  spawnParkedCar(world, 680, 1960, Math.PI / 2);
+  spawnParkedCar(world, 160, 1180, 0);
+  spawnParkedCar(world, 160, 700, Math.PI / 2);
+  spawnParkedCar(world, 160, 1000, 0);
+  spawnParkedCar(world, 160, 1500, Math.PI / 2);
+  spawnParkedCar(world, 160, 1900, 0);
   for (let i = 0; i < 10; i += 1) {
     const x = 300 + Math.random() * 2600;
     const y = 200 + Math.random() * 2000;

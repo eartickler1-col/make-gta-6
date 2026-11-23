@@ -95,7 +95,7 @@ function runGame() {
     cops: world.cops.length,
     missionIndex: world.missions.index,
     missionActive: !!world.missions.active,
-    missionObjective: world.missions.active ? currentObjective(world.missions)?.id ?? null : null,
+    missionObjective: world.missions.active ? currentObjective(world.missions)?.type ?? null : null,
     storyDone: world.storyDone,
   });
 

@@ -66,10 +66,13 @@ export function tryEnterCar(world, player) {
   player.x = car.x;
   player.y = car.y;
   car.isTraffic = false;
-  if (car.driver) {
-    // A driver is in it: stealing it is a crime.
-    car.driver = null;
+  if (car.driver) car.driver = null;
+  // Stealing any car is a crime — once per car, so getting back into the
+  // car you already stole does not raise the heat again.
+  if (!car.stolen) {
+    car.stolen = true;
     world.addWanted(1, 'stole a car');
+    world.say('Stolen! The police will be looking for this car.');
   }
   return car;
 }

@@ -11,7 +11,7 @@
 import { VIEW_H, VIEW_W } from './config.js';
 import { createWorld, stepWorld } from './game.js';
 import { currentObjective } from './missions.js';
-import { createInput, ACTION_CONFIRM, ACTION_PAUSE } from './input.js';
+import { createInput, ACTION_CONFIRM, ACTION_CONTINUE, ACTION_PAUSE } from './input.js';
 import { drawWorld } from './render.js';
 import { drawBusted, drawHud, drawMissionComplete, drawPaused, drawStoryComplete, drawTitle } from './hud.js';
 import { stageShot } from './shots.js';
@@ -144,7 +144,8 @@ function runGame() {
     }
     const actions = input.takeActions();
     if (screen === 'title') {
-      if (actions & ACTION_CONFIRM) startGame(false);
+      if ((actions & ACTION_CONTINUE) && hasSave()) startGame(true);
+      else if (actions & ACTION_CONFIRM) startGame(false);
       return;
     }
     if (screen === 'paused') {
@@ -206,9 +207,9 @@ function runGame() {
     accumulator += Math.min((now - last) / 1000, MAX_FRAME);
     last = now;
     handleActions();
-    // Title screen: Enter starts a new game, C continues a save.
+    // Title screen: Enter starts a new game, C continues a save (queued
+    // actions, so a quick tap is never missed between frames).
     if (screen === 'title') {
-      if (input.held && input.held('KeyC') && hasSave()) startGame(true);
       while (accumulator >= STEP && screen === 'title') {
         step();
         accumulator -= STEP;

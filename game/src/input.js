@@ -12,6 +12,7 @@ export const ACTION_RELOAD = 16;
 export const ACTION_MELEE = 32;
 export const ACTION_MUTE = 64;
 export const ACTION_MISSION = 128;
+export const ACTION_CONTINUE = 256;
 
 const UP = new Set(['ArrowUp', 'KeyW']);
 const DOWN = new Set(['ArrowDown', 'KeyS']);
@@ -36,6 +37,7 @@ export function createInput(canvas) {
     else if (event.code === 'KeyR') actions |= ACTION_RELOAD;
     else if (event.code === 'KeyF') actions |= ACTION_MELEE;
     else if (event.code === 'KeyM') actions |= ACTION_MUTE;
+    else if (event.code === 'KeyC') actions |= ACTION_CONTINUE;
     else if (event.code === 'Tab') {
       actions |= ACTION_MISSION;
       event.preventDefault();
